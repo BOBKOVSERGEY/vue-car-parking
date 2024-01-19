@@ -15,7 +15,7 @@ export const useLogin = defineStore("login", () => {
   function resetForm() {
     form.email = '';
     form.password = '';
-    form.remember = '';
+    form.remember = false;
 
     errors.value = {};
   }

@@ -20,7 +20,7 @@ export const useAuth = defineStore("auth", () => {
     router.push({ name: 'vehicles.index' })
   }
 
-  function destroyTokenAndRedirectTo(routerName) {
+  function destroyTokenAndRedirectTo(routerName = "login") {
     setAccessToken(null);
     router.push({ name: routerName })
   }
@@ -28,7 +28,7 @@ export const useAuth = defineStore("auth", () => {
   async function logout() {
     return window.axios.post("auth/logout")
       .finally(() => {
-        destroyTokenAndRedirectTo("register")
+        destroyTokenAndRedirectTo()
       })
   }
 

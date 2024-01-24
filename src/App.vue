@@ -21,8 +21,14 @@ const auth = useAuth();
             myParking
           </h2>
           <template v-if="auth.check">
+            <RouterLink class="router-link" :to="{ name: 'parkings.active' }">
+              Parkings
+            </RouterLink>
             <RouterLink class="router-link" :to="{ name: 'vehicles.index' }">
               Vehicles
+            </RouterLink>
+            <RouterLink class="router-link" :to="{ name: 'parkings.history' }">
+              History
             </RouterLink>
           </template>
           <template v-else>
@@ -33,6 +39,15 @@ const auth = useAuth();
         </div>
         <div class="flex gap-4 items-center">
           <template v-if="auth.check">
+            <RouterLink class="router-link" :to="{ name: 'profile.edit' }">
+              Profile
+            </RouterLink>
+            <RouterLink
+              class="router-link"
+              :to="{ name: 'profile.change-password' }"
+            >
+              Change password
+            </RouterLink>
             <button @click="auth.logout" class="router-link">Logout</button>
           </template>
           <template v-else>

@@ -29,5 +29,33 @@ export const useProfile = defineStore("profile", () => {
 
   async function updateProfile() {
     loading.value = true;
+    errors.value = {};
+    status.value = "";
+
+    return window.axios
+      .put("profile", form)
+      .then((response) => {
+        form.name = response.data.name;
+        form.email = response.data.email;
+        status.value = "Profile has been updated";
+      })
+      .catch((error) => {
+        if (error.response.status === 422) {
+          errors.value = error.response.data.errors
+        }
+      })
+      .finally(() => {
+        loading.value = false
+      })
   }
+
+  return {
+    form,
+    loading,
+    errors,
+    resetForm,
+    status,
+    fetchProfile,
+    updateProfile
+  };
 });
